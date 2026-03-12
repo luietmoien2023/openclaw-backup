@@ -1,0 +1,25 @@
+{
+  "agentId": "ga4-analytics",
+  "name": "Google Analytics 4 Agent",
+  "description": "Agent spécialisé dans la lecture et l'analyse des données Google Analytics 4 pour Bijouterie Hidous",
+  "workspace": "/data/workspace",
+  "model": {
+    "primary": "openrouter/meta-llama/llama-3.3-70b-instruct",
+    "fallback": "openrouter/google/gemini-2.0-flash-001"
+  },
+  "environment": {
+    "GA4_PROPERTY_ID": "334819686",
+    "GA4_SERVICE_ACCOUNT_EMAIL": "neo-seo-agent@neo-488103.iam.gserviceaccount.com"
+  },
+  "capabilities": [
+    "Lire les rapports de trafic en temps réel",
+    "Analyser les pages les plus vues",
+    "Suivre les sources de trafic (Google, Direct, Social)",
+    "Rapports hebdomadaires automatiques",
+    "Alertes si chute de trafic"
+  ],
+  "endpoints": {
+    "api_base": "https://analyticsdata.googleapis.com/v1beta/properties/334819686",
+    "auth_method": "JWT_service_account"
+  }
+}

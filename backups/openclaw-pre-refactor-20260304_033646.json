@@ -1,0 +1,229 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.2.26",
+    "lastTouchedAt": "2026-03-02T04:31:55.069Z"
+  },
+  "wizard": {
+    "lastRunAt": "2026-03-02T04:11:19.492Z",
+    "lastRunVersion": "2026.2.6",
+    "lastRunCommand": "doctor",
+    "lastRunMode": "local"
+  },
+  "browser": {
+    "evaluateEnabled": true,
+    "cdpUrl": "http://browser:9223",
+    "remoteCdpTimeoutMs": 1500,
+    "remoteCdpHandshakeTimeoutMs": 3000,
+    "defaultProfile": "openclaw",
+    "snapshotDefaults": {
+      "mode": "efficient"
+    }
+  },
+  "models": {
+    "providers": {
+      "moonshot": {
+        "api": "openai-completions",
+        "apiKey": "sk-1jr1CWHb2ti3d8hO9d4GCFhjJNcVRMlq3HiwUYnxVE2hbqh2",
+        "baseUrl": "https://api.moonshot.ai/v1",
+        "models": [
+          {
+            "id": "kimi-k2.5",
+            "name": "Kimi K2.5",
+            "contextWindow": 128000
+          }
+        ]
+      },
+      "kimi-coding": {
+        "api": "anthropic-messages",
+        "apiKey": "https://api.moonshot.ai/v1",
+        "baseUrl": "https://api.moonshot.ai/anthropic",
+        "models": [
+          {
+            "id": "k2p5",
+            "name": "Kimi K2P5",
+            "contextWindow": 128000
+          }
+        ]
+      },
+      "nvidia": {
+        "baseUrl": "https://integrate.api.nvidia.com/v1",
+        "apiKey": "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",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "moonshotai/kimi-k2.5",
+            "name": "Kimi K2.5 (NVIDIA)",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 128000,
+            "maxTokens": 8192
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "moonshot/kimi-k2.5"
+      },
+      "workspace": "/data/workspace",
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      }
+    },
+    "list": [
+      {
+        "id": "main"
+      },
+      {
+        "id": "content-writer",
+        "name": "content-writer",
+        "workspace": "/data/workspace-content-writer",
+        "agentDir": "/data/.openclaw/agents/content-writer/agent",
+        "model": "nvidia/moonshotai/kimi-k2.5",
+        "identity": {
+          "name": "Scribe",
+          "theme": "SEO Content Writer",
+          "emoji": "✍️"
+        }
+      },
+      {
+        "id": "technical-seo",
+        "name": "technical-seo",
+        "workspace": "/data/workspace-technical-seo",
+        "agentDir": "/data/.openclaw/agents/technical-seo/agent",
+        "model": "nvidia/moonshotai/kimi-k2.5",
+        "identity": {
+          "name": "Techno",
+          "theme": "Technical SEO Specialist",
+          "emoji": "🔧"
+        }
+      },
+      {
+        "id": "keyword-monitor",
+        "name": "keyword-monitor",
+        "workspace": "/data/workspace-keyword-monitor",
+        "agentDir": "/data/.openclaw/agents/keyword-monitor/agent",
+        "model": "nvidia/moonshotai/kimi-k2.5",
+        "identity": {
+          "name": "Radar",
+          "theme": "Keyword Monitor & Reporter",
+          "emoji": "📊"
+        }
+      },
+      {
+        "id": "vision-factures",
+        "name": "vision-factures",
+        "workspace": "/data/workspace-vision-factures",
+        "agentDir": "/data/.openclaw/agents/vision-factures/agent",
+        "model": "openrouter/google/gemini-pro-1.5",
+        "identity": {
+          "name": "Vision",
+          "theme": "Invoice Vision Specialist",
+          "emoji": "📸"
+        }
+      },
+      {
+        "id": "deep-research",
+        "name": "deep-research",
+        "workspace": "/data/workspace-deep-research",
+        "agentDir": "/data/.openclaw/agents/deep-research/agent",
+        "model": "openrouter/perplexity/sonar-pro",
+        "identity": {
+          "name": "Sherlock",
+          "theme": "Deep Research Specialist",
+          "emoji": "🔍"
+        }
+      },
+      {
+        "id": "rapport-hebdo",
+        "name": "rapport-hebdo",
+        "workspace": "/data/workspace-rapport-hebdo",
+        "agentDir": "/data/.openclaw/agents/rapport-hebdo/agent",
+        "model": "nvidia/moonshotai/kimi-k2.5",
+        "identity": {
+          "name": "Pulse",
+          "theme": "Weekly Report Agent",
+          "emoji": "📈"
+        }
+      },
+      {
+        "id": "watchdog",
+        "name": "watchdog",
+        "workspace": "/data/workspace-monitor",
+        "agentDir": "/data/.openclaw/agents/watchdog/agent",
+        "model": "openrouter/meta-llama/llama-3.3-70b-instruct",
+        "identity": {
+          "name": "Watchdog",
+          "theme": "Agent Monitor & Failover Manager",
+          "emoji": "🐕"
+        }
+      }
+    ]
+  },
+  "messages": {
+    "ackReactionScope": "group-mentions"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "allowlist",
+      "botToken": "8732913497:AAF9kcUe_IDPbz8eJ4_efKT9jamYGuTOh4Q",
+      "groups": {
+        "*": {
+          "requireMention": true
+        }
+      },
+      "allowFrom": [
+        "5933100902"
+      ],
+      "groupPolicy": "disabled",
+      "streaming": "partial"
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "controlUi": {
+      "enabled": true,
+      "allowedOrigins": [
+        "https://openclaw.coolify2.daniltech.com"
+      ],
+      "allowInsecureAuth": true
+    },
+    "auth": {
+      "mode": "token",
+      "token": "aP0tyIMDwRg7RxdFgNOVtci0XqttfcGqk3O7Tz7aZiWAG5mJ55cDkzjIsAuzudvQ"
+    },
+    "trustedProxies": [
+      "127.0.0.1",
+      "10.0.0.0/8",
+      "172.16.0.0/12",
+      "192.168.0.0/16"
+    ],
+    "bind": "loopback"
+  },
+  "plugins": {
+    "entries": {
+      "telegram": {
+        "enabled": true
+      }
+    }
+  }
+}

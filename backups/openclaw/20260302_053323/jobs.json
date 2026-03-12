@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "jobs": [
+    {
+      "id": "1d9465bf-889e-48f3-9703-bacbc7981650",
+      "agentId": "main",
+      "name": "watchdog-health-check",
+      "enabled": true,
+      "createdAtMs": 1772422452175,
+      "updatedAtMs": 1772428518111,
+      "schedule": {
+        "kind": "every",
+        "everyMs": 1800000,
+        "anchorMs": 1772422452175
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "next-heartbeat",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Vérifier la santé de tous les agents (Scribe, Techno, Radar, Vision, Sherlock, Pulse). Pour chaque agent : 1) Vérifier s'il est actif, 2) Si erreur 429 ou modèle indisponible → préparer basculement vers modèle failover, 3) Logger dans /data/workspace/monitor/logs/. Si 3 modèles échouent pour un agent → alerter Danil sur Telegram.",
+        "model": "openrouter/meta-llama/llama-3.3-70b-instruct",
+        "timeoutSeconds": 120
+      },
+      "delivery": {
+        "mode": "none"
+      },
+      "state": {
+        "nextRunAtMs": 1772430198052,
+        "lastRunAtMs": 1772428398052,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 120059,
+        "lastDeliveryStatus": "not-requested",
+        "consecutiveErrors": 1,
+        "lastError": "Error: cron: job execution timed out"
+      }
+    }
+  ]
+}
