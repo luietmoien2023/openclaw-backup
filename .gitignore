@@ -1,0 +1,47 @@
+# OpenClaw Backup - .gitignore
+# Exclure les fichiers sensibles
+
+# OpenClaw config (contains API keys - REDACTED in config)
+.openclaw/
+.config/
+.learnings/
+
+# Credentials and secrets
+credentials/
+*.key
+*.pem
+*.p12
+id_rsa*
+id_ed25519*
+.env
+*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Dependencies
+node_modules/
+package-lock.json
+package.json
+
+# Build artifacts
+dist/
+build/
+*.o
+*.so
+
+# Go
+go/
+linuxbrew/
+uv/
+
+# Logs
+*.log
+logs/
+
+# Temporary
+tmp/
+temp/
+*.tmp
+*.bak

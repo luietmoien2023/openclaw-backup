@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "jobs": [
+    {
+      "id": "1d9465bf-889e-48f3-9703-bacbc7981650",
+      "agentId": "main",
+      "name": "watchdog-health-check",
+      "enabled": true,
+      "createdAtMs": 1772422452175,
+      "updatedAtMs": 1772428518111,
+      "schedule": {
+        "kind": "every",
+        "everyMs": 3600000,
+        "anchorMs": 1772422452175
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "next-heartbeat",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Vérification santé rapide agents SEO. Check modèles: NVIDIA (gratuit) puis Moonshot (backup). Si 3 échecs consécutifs → alerter Danil sur Telegram.",
+        "model": "openrouter/google/gemma-2-9b-it:free",
+        "timeoutSeconds": 60
+      },
+      "delivery": {
+        "mode": "none"
+      },
+      "state": {
+        "nextRunAtMs": 1772430198052,
+        "lastRunAtMs": 1772428398052,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 5000,
+        "lastDelivered": false,
+        "lastDeliveryStatus": "not-delivered",
+        "consecutiveErrors": 0
+      }
+    }
+  ]
+}
