@@ -1,0 +1,8 @@
+1
+00:00:00,000 --> 00:00:07,020
+je t'avais dit de faire une sauvegarde complète du système sur mon github à 3 heures du matin
+
+2
+00:00:07,020 --> 00:00:11,880
+tu vas trouver ça dans la c'est programmé normalement pourquoi tu l'as pas fait
+

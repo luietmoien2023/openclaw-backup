@@ -1,1 +1,93 @@
-404: Not Found
+#!/bin/bash
+# Local Whisper STT script
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SKILL_DIR="$(dirname "$SCRIPT_DIR")"
+VENV_DIR="$SKILL_DIR/.venv"
+
+# Default values
+MODEL="base"
+LANGUAGE=""
+TIMESTAMPS=false
+JSON_OUTPUT=false
+QUIET=false
+
+# Parse arguments
+AUDIO_FILE=""
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --model|-m)
+            MODEL="$2"
+            shift 2
+            ;;
+        --language|-l)
+            LANGUAGE="$2"
+            shift 2
+            ;;
+        --timestamps|-t)
+            TIMESTAMPS=true
+            shift
+            ;;
+        --json|-j)
+            JSON_OUTPUT=true
+            shift
+            ;;
+        --quiet|-q)
+            QUIET=true
+            shift
+            ;;
+        -*)
+            echo "Unknown option: $1"
+            exit 1
+            ;;
+        *)
+            AUDIO_FILE="$1"
+            shift
+            ;;
+    esac
+done
+
+if [[ -z "$AUDIO_FILE" ]]; then
+    echo "Usage: local-whisper <audio_file> [options]"
+    echo ""
+    echo "Options:"
+    echo "  --model, -m       Model size (tiny, base, small, turbo, large-v3)"
+    echo "  --language, -l    Language code (auto-detect if omitted)"
+    echo "  --timestamps, -t  Include word timestamps"
+    echo "  --json, -j        JSON output"
+    echo "  --quiet, -q       Suppress progress"
+    exit 1
+fi
+
+if [[ ! -f "$AUDIO_FILE" ]]; then
+    echo "Error: File not found: $AUDIO_FILE"
+    exit 1
+fi
+
+# Check if venv exists
+if [[ ! -d "$VENV_DIR" ]]; then
+    echo "Creating virtual environment..."
+    cd "$SKILL_DIR"
+    uv venv .venv --python 3.12
+    uv pip install --python .venv/bin/python click openai-whisper torch --index-url https://download.pytorch.org/whl/cpu
+fi
+
+# Build whisper command
+WHISPER_ARGS=("--model" "$MODEL")
+
+if [[ -n "$LANGUAGE" ]]; then
+    WHISPER_ARGS+=("--language" "$LANGUAGE")
+fi
+
+if [[ "$TIMESTAMPS" == true ]]; then
+    WHISPER_ARGS+=("--word_timestamps" "True")
+fi
+
+if [[ "$QUIET" == true ]]; then
+    export PYTHONWARNINGS="ignore"
+fi
+
+# Run whisper
+"$VENV_DIR/bin/python" -m whisper "$AUDIO_FILE" "${WHISPER_ARGS[@]}"
