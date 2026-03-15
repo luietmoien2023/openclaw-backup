@@ -1,0 +1,461 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.3.8",
+    "lastTouchedAt": "2026-03-11T03:49:42.308Z"
+  },
+  "wizard": {
+    "lastRunAt": "2026-03-02T04:11:19.492Z",
+    "lastRunVersion": "2026.2.6",
+    "lastRunCommand": "doctor",
+    "lastRunMode": "local"
+  },
+  "browser": {
+    "evaluateEnabled": true,
+    "cdpUrl": "http://browser:9223",
+    "remoteCdpTimeoutMs": 1500,
+    "remoteCdpHandshakeTimeoutMs": 3000,
+    "defaultProfile": "openclaw",
+    "snapshotDefaults": {
+      "mode": "efficient"
+    }
+  },
+  "models": {
+    "providers": {
+      "moonshot": {
+        "api": "openai-completions",
+        "apiKey": "sk-BSFOmidIDBaPqrR7e7X9DH13vCGDFJSXeOAqyZOZdg25b7Yo",
+        "baseUrl": "https://api.moonshot.ai/v1",
+        "models": [
+          {
+            "id": "kimi-k2.5",
+            "name": "Kimi K2.5",
+            "contextWindow": 128000
+          }
+        ]
+      },
+      "nvidia": {
+        "baseUrl": "https://integrate.api.nvidia.com/v1",
+        "apiKey": "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",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "moonshotai/kimi-k2.5",
+            "name": "Kimi K2.5 (NVIDIA)",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 128000,
+            "maxTokens": 8192
+          }
+        ]
+      },
+      "kimi-coding": {
+        "api": "anthropic-messages",
+        "apiKey": "https://api.moonshot.ai/v1",
+        "baseUrl": "https://api.moonshot.ai/anthropic",
+        "models": [
+          {
+            "id": "k2p5",
+            "name": "Kimi K2P5",
+            "contextWindow": 128000
+          }
+        ]
+      },
+      "straico": {
+        "baseUrl": "https://api.straico.com/v2",
+        "apiKey": "${STRAICO_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "openai/gpt-5.2",
+            "name": "GPT-5.2 Mini",
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0
+            },
+            "contextWindow": 333330
+          },
+          {
+            "id": "anthropic/claude-sonnet-4.5",
+            "name": "Claude 4.5 Sonnet",
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0
+            },
+            "contextWindow": 83333
+          },
+          {
+            "id": "moonshotai/Kimi-K2.5",
+            "name": "Kimi K2.5",
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0
+            },
+            "contextWindow": 21845
+          },
+          {
+            "id": "google/gemini-3-flash-preview",
+            "name": "Gemini 3 Flash",
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0
+            },
+            "contextWindow": 786432
+          },
+          {
+            "id": "minimax/minimax-m2",
+            "name": "MiniMax M2",
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0
+            },
+            "contextWindow": 17067
+          },
+          {
+            "id": "x-ai/grok-4-fast",
+            "name": "Grok 4 Fast",
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0
+            },
+            "contextWindow": 785682
+          },
+          {
+            "id": "deepseek/deepseek-r1",
+            "name": "DeepSeek R1",
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0
+            },
+            "contextWindow": 48000
+          },
+          {
+            "id": "openai/gpt-4o-2024-11-20",
+            "name": "GPT-4o Vision",
+            "input": [
+              "text",
+              "image"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0
+            },
+            "contextWindow": 96000
+          },
+          {
+            "id": "google/gemini-2.5-flash-lite",
+            "name": "Gemini 2.0 Vision",
+            "input": [
+              "text",
+              "image"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0
+            },
+            "contextWindow": 49151
+          },
+          {
+            "id": "perplexity/sonar",
+            "name": "Perplexity Sonnet",
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0
+            },
+            "contextWindow": 95304
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "moonshot/kimi-k2.5",
+        "fallbacks": [
+          "moonshot/kimi-k2.5",
+          "minimax/minimax-m2.5",
+          "openai/gpt-4o-mini"
+        ]
+      },
+      "workspace": "/data/workspace",
+      "bootstrapTotalMaxChars": 1,
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      }
+    },
+    "list": [
+      {
+        "id": "main",
+        "default": true,
+        "workspace": "/data/workspace",
+        "model": {
+          "primary": "nvidia/moonshotai/kimi-k2.5",
+          "fallbacks": [
+            "moonshot/kimi-k2.5",
+            "minimax/minimax-m2.5",
+            "openai/gpt-4o-mini"
+          ]
+        },
+        "identity": {
+          "name": "Néo",
+          "theme": "Danil BizOps Assistant",
+          "emoji": "🎯"
+        }
+      },
+      {
+        "id": "seo-morpheus",
+        "name": "seo-morpheus",
+        "workspace": "/data/workspace-seo",
+        "model": {
+          "primary": "openrouter/perplexity/sonar",
+          "fallbacks": [
+            "minimax/minimax-m2.5",
+            "openai/gpt-4o-mini"
+          ]
+        },
+        "identity": {
+          "name": "Morpheus",
+          "theme": "SEO Strategist & Researcher",
+          "emoji": "🔍"
+        }
+      },
+      {
+        "id": "seo-trinity",
+        "name": "seo-trinity",
+        "workspace": "/data/workspace-seo",
+        "model": {
+          "primary": "openrouter/anthropic/claude-sonnet-4.6",
+          "fallbacks": [
+            "minimax/minimax-m2.5",
+            "openai/gpt-4o"
+          ]
+        },
+        "identity": {
+          "name": "Trinity",
+          "theme": "SEO Content Writer",
+          "emoji": "✍️"
+        }
+      },
+      {
+        "id": "seo-oracle",
+        "name": "seo-oracle",
+        "workspace": "/data/workspace-seo",
+        "model": {
+          "primary": "nvidia/moonshotai/kimi-k2.5",
+          "fallbacks": [
+            "minimax/minimax-m2.5",
+            "moonshot/kimi-k2.5"
+          ]
+        },
+        "identity": {
+          "name": "Oracle",
+          "theme": "SEO Audit & Analysis",
+          "emoji": "📊"
+        }
+      },
+      {
+        "id": "dolibarr",
+        "name": "dolibarr",
+        "workspace": "/data/workspace-biz",
+        "model": {
+          "primary": "openrouter/meta-llama/llama-3.3-70b-instruct",
+          "fallbacks": [
+            "openrouter/google/gemini-2.0-flash-001",
+            "openai/gpt-4o-mini"
+          ]
+        },
+        "identity": {
+          "name": "Comptable",
+          "theme": "Dolibarr ERP Manager",
+          "emoji": "🧾"
+        }
+      },
+      {
+        "id": "paperless",
+        "name": "paperless",
+        "workspace": "/data/workspace-biz",
+        "model": {
+          "primary": "openrouter/google/gemini-2.0-flash-001",
+          "fallbacks": [
+            "openrouter/meta-llama/llama-3.3-70b-instruct",
+            "openai/gpt-4o-mini"
+          ]
+        },
+        "identity": {
+          "name": "Archiviste",
+          "theme": "Paperless Document Manager",
+          "emoji": "📄"
+        }
+      },
+      {
+        "id": "wp-manager",
+        "name": "wp-manager",
+        "workspace": "/data/workspace-tools",
+        "model": {
+          "primary": "nvidia/moonshotai/kimi-k2.5",
+          "fallbacks": [
+            "minimax/minimax-m2.5",
+            "moonshot/kimi-k2.5"
+          ]
+        },
+        "identity": {
+          "name": "Webmaster",
+          "theme": "WordPress & WooCommerce Manager",
+          "emoji": "🌐"
+        }
+      },
+      {
+        "id": "ha-manager",
+        "name": "ha-manager",
+        "workspace": "/data/workspace-tools",
+        "model": {
+          "primary": "openrouter/meta-llama/llama-3.3-70b-instruct",
+          "fallbacks": [
+            "openrouter/google/gemini-2.0-flash-001",
+            "openai/gpt-4o-mini"
+          ]
+        },
+        "identity": {
+          "name": "Domotix",
+          "theme": "Home Assistant Manager",
+          "emoji": "🏠"
+        }
+      },
+      {
+        "id": "n8n-manager",
+        "name": "n8n-manager",
+        "workspace": "/data/workspace-tools",
+        "model": {
+          "primary": "openrouter/anthropic/claude-sonnet-4.6",
+          "fallbacks": [
+            "minimax/minimax-m2.5",
+            "openai/gpt-4o-mini"
+          ]
+        },
+        "identity": {
+          "name": "Automate",
+          "theme": "N8N Workflow Manager",
+          "emoji": "⚙️"
+        }
+      },
+      {
+        "id": "watchdog",
+        "name": "watchdog",
+        "workspace": "/data/workspace",
+        "model": {
+          "primary": "openrouter/meta-llama/llama-3.3-70b-instruct",
+          "fallbacks": [
+            "openrouter/google/gemini-2.0-flash-001",
+            "openai/gpt-4o-mini"
+          ]
+        },
+        "identity": {
+          "name": "Watchdog",
+          "theme": "System Monitor & Failover",
+          "emoji": "🐕"
+        }
+      }
+    ]
+  },
+  "messages": {
+    "ackReactionScope": "group-mentions"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "allowlist",
+      "botToken": "8732913497:AAF9kcUe_IDPbz8eJ4_efKT9jamYGuTOh4Q",
+      "groups": {
+        "*": {
+          "requireMention": true
+        }
+      },
+      "allowFrom": [
+        5933100902
+      ],
+      "groupPolicy": "disabled",
+      "streaming": "partial"
+    }
+  },
+  "talk": {
+    "interruptOnSpeech": true
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "controlUi": {
+      "enabled": true,
+      "allowedOrigins": [
+        "https://openclaw.coolify2.daniltech.com"
+      ],
+      "allowInsecureAuth": true
+    },
+    "auth": {
+      "mode": "token",
+      "token": "aP0tyIMDwRg7RxdFgNOVtci0XqttfcGqk3O7Tz7aZiWAG5mJ55cDkzjIsAuzudvQ"
+    },
+    "trustedProxies": [
+      "127.0.0.1",
+      "10.0.0.0/8",
+      "172.16.0.0/12",
+      "192.168.0.0/16"
+    ]
+  },
+  "skills": {
+    "entries": {
+      "openai-whisper": {
+        "enabled": true
+      }
+    }
+  },
+  "plugins": {
+    "entries": {
+      "telegram": {
+        "enabled": true
+      }
+    }
+  }
+}
